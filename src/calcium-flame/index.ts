@@ -2,7 +2,7 @@ import { LitElement, html } from 'lit'
 import { customElement, property, state } from 'lit/decorators.js'
 import { map } from 'lit/directives/map.js'
 import Statement from './statement'
-import * as constant from './constant'
+import { index, keyword } from './constant'
 
 @customElement('calcium-flame')
 export class CalciumFlame extends LitElement {
@@ -13,8 +13,10 @@ export class CalciumFlame extends LitElement {
   private _lineIndex = 0
 
   private _createCmd(stmt: Statement) {
-    const kw = stmt[constant.index.statement.keyword]
+    const kw = stmt[index.statement.keyword]
     switch (kw) {
+      case keyword.command.assign:
+        return html`<p>Assign</p>`
       default:
         return html`<p>Not implemented</p>`
     }
