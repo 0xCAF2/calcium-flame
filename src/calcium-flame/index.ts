@@ -13,7 +13,7 @@ export class CalciumFlame extends LitElement {
   private _lineIndex = 0
 
   private _createCmd(stmt: Statement) {
-    const kw = stmt[index.statement.keyword]
+    const kw = stmt[index.statement.keyword] as string
     switch (kw) {
       case keyword.command.assign:
         return html`<p>Assign</p>`

@@ -9,6 +9,14 @@
     <script type="module" src="/src/calcium-flame/index.ts"></script>
   </head>
   <body>
-    <calcium-flame> </calcium-flame>
+    <calcium-flame id="cafl"> </calcium-flame>
+    <script>
+      const cafl = document.querySelector('#cafl')
+      cafl.code = [
+        [1, [], '#', '0.0.1'],
+        [1, [], '=', ['var', 'data'], 73],
+        [1, [], 'end'],
+      ]
+    </script>
   </body>
 </html>
