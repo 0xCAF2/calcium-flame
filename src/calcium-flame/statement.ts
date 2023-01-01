@@ -1,2 +1,1 @@
-type Statement = [number, any[], string, ...any[]]
-export default Statement
+export type Statement = [number, any[], string, ...any]

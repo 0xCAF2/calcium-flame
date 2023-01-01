@@ -1,13 +1,13 @@
 {
   "name": "calcium-flame",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
-  "main": "dist/my-element.es.js",
+  "main": "dist/index.es.js",
   "exports": {
-    ".": "./dist/my-element.es.js"
+    ".": "./dist/index.es.js"
   },
-  "types": "types/my-element.d.ts",
+  "types": "types/index.d.ts",
   "files": [
     "dist",
     "types"

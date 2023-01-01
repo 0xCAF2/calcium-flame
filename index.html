@@ -12,11 +12,13 @@
     <calcium-flame id="cafl"> </calcium-flame>
     <script>
       const cafl = document.querySelector('#cafl')
-      cafl.code = [
+      const code = [
         [1, [], '#', '0.0.1'],
         [1, [], '=', ['var', 'data'], 73],
+        [1, [], 'print', [['var', 'data']]],
         [1, [], 'end'],
       ]
+      cafl.code = code
     </script>
   </body>
 </html>
