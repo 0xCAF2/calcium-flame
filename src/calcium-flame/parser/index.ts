@@ -8,6 +8,10 @@ export function parse(stmt: Statement): TemplateResult {
   switch (kw) {
     case keyword.command.assign:
       return parseAssign(stmt)
+    case keyword.command.comment:
+      return html``
+    case keyword.command.end:
+      return html`<p>プログラムの終わり</p>`
     default:
       return html`<p>Not implemented</p>`
   }

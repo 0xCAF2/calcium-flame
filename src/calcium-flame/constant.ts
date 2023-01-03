@@ -11,6 +11,12 @@ const index = {
 const keyword = {
   command: {
     assign: '=',
+    comment: '#',
+    end: 'end',
+  },
+  expression: {
+    subscript: 'sub',
+    variable: 'var',
   },
 }
 
