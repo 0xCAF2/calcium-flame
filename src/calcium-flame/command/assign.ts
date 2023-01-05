@@ -1,11 +1,13 @@
 import { LitElement, html } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
+import { Environment } from '../environment'
 import { getDescription } from '../expression/getDescription'
 import { Expression } from '../type/expression'
 import { Reference } from '../type/reference'
+import { Command } from '.'
 
 @customElement('cf-assign')
-export class Assign extends LitElement {
+export class Assign extends LitElement implements Command {
   @property()
   lhs!: Reference
 
@@ -13,9 +15,11 @@ export class Assign extends LitElement {
   rhs!: Expression
 
   render() {
-    return html`<p>
-      ${html`${this.lhs.description}`} = ${getDescription(this.rhs)}
-    </p>`
+    return html`<p>${this.lhs.description} = ${getDescription(this.rhs)}</p>`
+  }
+
+  execute(env: Environment): void {
+    env.jump(1)
   }
 }
 

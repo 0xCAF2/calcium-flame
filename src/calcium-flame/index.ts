@@ -1,17 +1,18 @@
-import { LitElement, html } from 'lit'
-import { customElement, property, state } from 'lit/decorators.js'
+import { LitElement, html, css } from 'lit'
+import { customElement, property, query, state } from 'lit/decorators.js'
 import { map } from 'lit/directives/map.js'
 import { Statement } from './statement'
 import './command/assign'
+import './environment'
 import { parse } from './parser'
 import { Environment } from './environment'
+import { Command } from './command'
 
 @customElement('calcium-flame')
 export class CalciumFlame extends LitElement {
   set code(val: string | Statement[]) {
     const oldVal = this._code
     this._code = this.load(val)
-    this._env = new Environment()
     this.requestUpdate('code', oldVal)
   }
 
@@ -20,20 +21,49 @@ export class CalciumFlame extends LitElement {
     return this._code
   }
 
+  static styles = css`
+    #buttons {
+      position: fixed;
+      top: 8px;
+      left: 8px;
+      display: flex;
+      height: 48px;
+    }
+    #commands {
+      margin-top: 60px;
+    }
+    .current {
+      border: 4px solid dodgerblue;
+    }
+  `
+
   render() {
     return html`
-      <h1>calcium-flame</h1>
-      <p>${this._env?.lineIndex ?? -1}</p>
+      <div id="buttons">
+        <button id="button-step" @click=${this.step}>Step</button>
+        <button id="button-run">Run</button>
+      </div>
       <div id="commands">
         ${map(this._code, (stmt) => html`${parse(stmt)}`)}
       </div>
+      <cf-environment id="env"></cf-environment>
       <div id="context"></div>
     `
   }
 
+  step() {
+    const cmd = this._commands.children[this._env.lineIndex]
+    cmd.className = 'current'
+    ;(cmd as unknown as Command).execute(this._env!)
+  }
+
   private _code!: Statement[]
 
-  private _env?: Environment
+  @query('#commands')
+  private _commands!: HTMLDivElement
+
+  @query('#env')
+  private _env!: Environment
 
   private load(code: string | Statement[]): Statement[] {
     if (typeof code === 'string') {
