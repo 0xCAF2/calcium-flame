@@ -1,5 +1,5 @@
 import { LitElement, html, css } from 'lit'
-import { customElement, property, query, state } from 'lit/decorators.js'
+import { customElement, property, query } from 'lit/decorators.js'
 import { map } from 'lit/directives/map.js'
 import { Statement } from './statement'
 import './command/assign'
