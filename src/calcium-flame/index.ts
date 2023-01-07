@@ -35,7 +35,14 @@ export class CalciumFlame extends LitElement {
     .current {
       border: 4px solid dodgerblue;
     }
+    .command {
+      border: 4px solid transparent;
+    }
   `
+
+  firstUpdated(): void {
+    this.step()
+  }
 
   render() {
     return html`
@@ -44,7 +51,10 @@ export class CalciumFlame extends LitElement {
         <button id="button-run">Run</button>
       </div>
       <div id="commands">
-        ${map(this._code, (stmt) => html`${parse(stmt)}`)}
+        ${map(
+          this._code,
+          (stmt) => html`<div class="command">${parse(stmt)}</div>`
+        )}
       </div>
       <cf-environment id="env"></cf-environment>
       <div id="context"></div>
@@ -52,9 +62,12 @@ export class CalciumFlame extends LitElement {
   }
 
   step() {
-    const cmd = this._commands.children[this._env.lineIndex]
-    cmd.className = 'current'
+    let div = this._commands.children[this._env.lineIndex]
+    div.className = 'command'
+    const cmd = div.children[0]
     ;(cmd as unknown as Command).execute(this._env!)
+    div = this._commands.children[this._env.lineIndex]
+    div.className = 'current'
   }
 
   private _code!: Statement[]
