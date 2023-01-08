@@ -3,6 +3,7 @@ import { Statement } from '../statement'
 import { index, keyword } from '../constant'
 import { parseAssign } from './parseAssign'
 import '../command/comment'
+import '../command/end'
 
 export function parse(stmt: Statement): TemplateResult {
   const kw = stmt[index.statement.keyword] as string
@@ -12,7 +13,7 @@ export function parse(stmt: Statement): TemplateResult {
     case keyword.command.comment:
       return html`<cf-comment></cf-comment>`
     case keyword.command.end:
-      return html`<p>プログラムの終わり</p>`
+      return html`<cf-end></cf-end>`
     default:
       return html`<p>Not implemented</p>`
   }

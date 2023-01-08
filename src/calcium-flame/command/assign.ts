@@ -15,10 +15,14 @@ export class Assign extends LitElement implements Command {
   rhs!: Expression
 
   render() {
-    return html`<p>${this.lhs.description} = ${getDescription(this.rhs)}</p>`
+    return html`<p>
+      ${getDescription(this.lhs)} = ${getDescription(this.rhs)}
+    </p>`
   }
 
   execute(env: Environment): void {
+    const value = env.evaluate(this.rhs)
+    this.lhs.assign(value, env)
     env.jump(1)
   }
 }

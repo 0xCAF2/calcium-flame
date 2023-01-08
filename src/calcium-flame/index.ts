@@ -29,11 +29,15 @@ export class CalciumFlame extends LitElement {
       display: flex;
       height: 48px;
     }
+    #button-step {
+      margin-right: 24px;
+    }
     #commands {
       margin-top: 60px;
     }
     .current {
       border: 4px solid dodgerblue;
+      border-radius: 4px;
     }
     .command {
       border: 4px solid transparent;
